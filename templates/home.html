@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .decorate{
+            color: black;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+    <title>ImageUpload App</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="py-5 text-center bg-secondary ">
+            <h1 class="decorate mb-3">Upload Image</h1>
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                    <p>{{fm.label_tag}} {{fm}} {{fm.errors|striptags}}</p> 
+                {% endfor%}
+                <input type="submit" class="btn btn-danger" value="upload">
+            </form>
+        </div>
+        <div class="row">
+            {% for im in img %}
+                <div class="col-sm-4">
+                    <div class="card m-2">
+                        <img src="{{im.photo.url}}" alt="" class="card img-top" height="200px">
+                        <div class="card-footer"> 
+                            <small class="text-muted">{{im.date}}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
